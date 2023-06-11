@@ -1,0 +1,45 @@
+server:
+  servlet:
+    encoding:
+      force: true
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1000MB # 单个文件最大大小
+      max-request-size: 1000MB # 最大请求大小
+  # springsecurity 配置
+  security:
+    user:
+      name: root
+      password: root
+  # 数据源
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/springsecurity?useUnicode=true&characterEncodeing=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.sai.springsecurity.**.infra.domain
+  configuration:
+    map-underscore-to-camel-case: true  # 下划线转驼峰
+    lazy-loading-enabled: true # 开启延时加载
+    cache-enabled: false # 不启用二级缓存，可能出现脏读
+    aggressive-lazy-loading: false #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+  global-config:
+    db-config:
+      id-type: AUTO # 0 数据库id自增 , 1 用户输入id , 2 全局唯一id , 3 全局唯一uuid
+      logic-delete-field: delflag
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+logging:
+  level:
+    com.sai.springsecurity: debug # 包下的日志输出级别
+    #com.sai.system: error # 包下的日志输出级别
+    root: info # 当前项目所有的日志输出级别
+  file:
+    name: springsecurity.log  # 大小超过10M后会自动生成一个日志文件
+    path: logs
+  pattern:
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
