@@ -2,6 +2,7 @@ package com.sai.springsecurity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
@@ -9,7 +10,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SpringSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityApplication.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(SpringSecurityApplication.class, args);
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        printBeansName(beanDefinitionNames);
+    }
+
+    private static void printBeansName(String[] beanNames) {
+        int index = 1;
+        for (String beanName : beanNames) {
+            System.out.println(index + "：" + beanName);
+            index ++;
+        }
     }
 
 }

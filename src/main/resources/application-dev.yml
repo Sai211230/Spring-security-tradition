@@ -7,11 +7,6 @@ spring:
     multipart:
       max-file-size: 1000MB # 单个文件最大大小
       max-request-size: 1000MB # 最大请求大小
-  # springsecurity 配置
-  security:
-    user:
-      name: root
-      password: root
   # 数据源
   datasource:
     username: root
@@ -40,6 +35,6 @@ logging:
     root: info # 当前项目所有的日志输出级别
   file:
     name: springsecurity.log  # 大小超过10M后会自动生成一个日志文件
-    path: logs
+#    path: logs
   pattern:
     console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
