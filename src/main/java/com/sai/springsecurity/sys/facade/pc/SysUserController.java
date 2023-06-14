@@ -3,7 +3,6 @@ package com.sai.springsecurity.sys.facade.pc;
 import com.sai.springsecurity.sys.infra.model.entity.SysUser;
 import com.sai.springsecurity.sys.infra.service.SysUserService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
