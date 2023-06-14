@@ -43,7 +43,6 @@ spring:
 #        max-active: 8 #连接池最大数据库连接数
 #        max-wait: -1ms #连接池最大阻塞等待时间（负数代表没有限制）
 
-
 # ORM框架配置
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*Mapper.xml
