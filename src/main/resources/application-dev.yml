@@ -77,4 +77,3 @@ swagger:
   enable: true
   applicationName: ${spring.application.name}
   version: 1.0.0
-  pathMapping: ${server.servlet.context-path}

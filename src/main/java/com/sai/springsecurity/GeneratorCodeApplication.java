@@ -170,9 +170,9 @@ public class GeneratorCodeApplication {
         // 父serviceimpl类
 //        strategy.setSuperServiceImplClass("com.sai.springsecurity.service.impl.BaseServiceImpl");
         // 父实体类
-//        strategy.setSuperEntityClass("com.sai.springsecurity.extension.activerecord.Model");
+        strategy.setSuperEntityClass("com.sai.springsecurity.base.entity.BaseEntity");
         // 父实体类字段
-//        strategy.setSuperEntityColumns("id", "del_flag"); // 配置后，遇到此类属性自动忽略
+        strategy.setSuperEntityColumns("id", "del_flag", "create_time", "create_by", "update_time", "update_by"); // 配置后，遇到此类属性自动忽略
         // 父dao类
 //        strategy.setSuperMapperClass("com.sai.springsecurity.dao.BaseDao");
         mpg.setStrategy(strategy);

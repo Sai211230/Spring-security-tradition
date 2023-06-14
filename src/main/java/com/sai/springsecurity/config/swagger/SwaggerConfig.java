@@ -47,11 +47,6 @@ public class SwaggerConfig {
      */
     private String version;
 
-    /**
-     * 请求前缀
-     */
-    private String pathMapping;
-
 
     /**
      * 创建API
@@ -70,14 +65,14 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 // 扫描指定包中的swagger注解
 //                 .apis(RequestHandlerSelectors.basePackage("com.sai.springsecurity"))
-                // 扫描所有 .apis(RequestHandlerSelectors.any())
+                // 扫描所有
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 .protocols(new HashSet<>(Arrays.asList("http", "https"))) // 支持的通讯协议集合
                 /* 设置安全模式，swagger可以设置访问token */
                 .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts())
-                .pathMapping(pathMapping);
+                .securityContexts(securityContexts());
     }
 
     /**
