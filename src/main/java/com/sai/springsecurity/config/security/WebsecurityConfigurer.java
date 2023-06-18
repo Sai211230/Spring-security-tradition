@@ -1,13 +1,17 @@
 package com.sai.springsecurity.config.security;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
+
+import javax.annotation.Resource;
 
 /**
  * @author SAI
@@ -18,10 +22,37 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true) // 开启注解鉴权
 public class WebsecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-    static {
-        log.info("初始化SecurityContextHolder多线程策略......");
-        SecurityContextHolder.setStrategyName("MODE_INHERITABLETHREADLOCAL");
+
+    @Resource
+    private UsernameDetailsService usernameDetailsService;
+
+    /**
+     * 设置数据源
+     *
+     * @param auth
+     * @throws Exception
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(usernameDetailsService);
     }
+
+    /**
+     * 容器注入全局ProviderManager
+     *
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    //    static {
+//        log.info("初始化SecurityContextHolder多线程策略......");
+//        SecurityContextHolder.setStrategyName("MODE_INHERITABLETHREADLOCAL");
+//    }
 
 //    public String getJsonStringFromRequest(HttpServletRequest request) throws IOException {
 //        StringBuffer sb = new StringBuffer();
@@ -50,14 +81,13 @@ public class WebsecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new OrRequestMatcher(
-                        new AntPathRequestMatcher("/logout", "GET"),
-                        new AntPathRequestMatcher("**/logout", "GET")
+                        new AntPathRequestMatcher("/logout", "GET")
+//                        ,new AntPathRequestMatcher("**/logout", "GET")
                 )) // 可匹配多个注销路径
                 .invalidateHttpSession(true) // 清除session 默认 true
                 .clearAuthentication(true) // 清除登录信息 默认 true
                 .logoutSuccessHandler(new CustomLogoutSuccessHandler()) // 注销成功处理
                 .and()
                 .csrf().disable(); // 关闭csrf
-
     }
 }

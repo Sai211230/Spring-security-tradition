@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.sai.springsecurity.base.model.BaseEntity;
 import com.sai.springsecurity.config.mybatis.ScisDbTypeConvert;
 
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class GeneratorCodeApplication {
         genCodeByTables(
                 "sys_user", // 最外面的包名
                 "sys",               // 模块名,以 “.” 分隔
-                new String[]{"sys_user"}, // 表名称
+                new String[]{"sys_login_user_role"}, // 表名称
                 "",                     // 表前缀
-                IdType.INPUT,           // 主键策略
+                IdType.AUTO,           // 主键策略
                 DbType.MYSQL);          // 数据库类型
     }
 
@@ -45,7 +46,7 @@ public class GeneratorCodeApplication {
         gc.setSwagger2(true);
         //生成代码后，是否打开文件夹
         gc.setOpen(false);
-        gc.setActiveRecord(true);   // 实体类继承Model
+        gc.setActiveRecord(false);   // 实体类继承Model
         gc.setFileOverride(true);   //是否覆盖原来代码，个人建议设置为false,别覆盖，危险系数太高
         gc.setBaseResultMap(true);  // 生成resultMap
         gc.setBaseColumnList(true); // 在xml中生成基础列
@@ -61,7 +62,7 @@ public class GeneratorCodeApplication {
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/tony-flowable?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true");
+        dsc.setUrl("jdbc:mysql://localhost:3306/springsecurity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("123456");
@@ -169,10 +170,11 @@ public class GeneratorCodeApplication {
 //        strategy.setSuperServiceClass("com.sai.springsecurity.service.BaseService");
         // 父serviceimpl类
 //        strategy.setSuperServiceImplClass("com.sai.springsecurity.service.impl.BaseServiceImpl");
-        // 父实体类
-        strategy.setSuperEntityClass("com.sai.springsecurity.base.entity.BaseEntity");
-        // 父实体类字段
-        strategy.setSuperEntityColumns("id", "del_flag", "create_time", "create_by", "update_time", "update_by"); // 配置后，遇到此类属性自动忽略
+//        // 父实体类
+//        strategy.setSuperEntityClass("com.sai.springsecurity.base.model.BaseEntity");
+//
+//        // 父实体类字段
+//        strategy.setSuperEntityColumns("id", "del_flag", "create_time", "create_by", "update_time", "update_by"); // 配置后，遇到此类属性自动忽略
         // 父dao类
 //        strategy.setSuperMapperClass("com.sai.springsecurity.dao.BaseDao");
         mpg.setStrategy(strategy);

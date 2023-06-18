@@ -1,4 +1,4 @@
-package com.sai.springsecurity.base.entity;
+package com.sai.springsecurity.base.model;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,7 +18,7 @@ public class BaseEntity {
 
     @ApiModelProperty(value = "主键id")
     @TableId(type = IdType.AUTO)
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "创建者")
     @TableField(value = "create_by", fill = FieldFill.INSERT)

@@ -1,6 +1,6 @@
 package com.sai.springsecurity.sys.infra.dao;
 
-import com.sai.springsecurity.sys.infra.model.entity.SysUser;
+import com.sai.springsecurity.sys.infra.model.entity.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author SAI
  * @since 2023-06-18
  */
-public interface SysUserDao extends BaseMapper<SysUser> {
+public interface SysRoleDao extends BaseMapper<SysRole> {
 
 }

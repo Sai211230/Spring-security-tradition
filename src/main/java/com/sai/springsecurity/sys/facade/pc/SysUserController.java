@@ -1,6 +1,10 @@
 package com.sai.springsecurity.sys.facade.pc;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sai.springsecurity.sys.infra.model.entity.SysUser;
+import com.sai.springsecurity.sys.infra.model.query.SysUserQuery;
 import com.sai.springsecurity.sys.infra.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +30,17 @@ public class SysUserController {
 
     @ApiOperation("获取所有用户信息")
     @PostMapping("/getAll")
-    public List<SysUser> getUserList() {
+    public List<SysUser> getAllUsers() {
         return sysUserService.list();
+    }
+
+    @ApiOperation("获取分页用户信息")
+    @PostMapping("/getPage")
+    public Page<SysUser> getUserPage(SysUserQuery query) {
+        Page<SysUser> page = new Page<>(query.getCurrent(), query.getSize());
+        LambdaQueryWrapper<SysUser> queryWrapper = Wrappers.lambdaQuery(SysUser.class)
+                .like(SysUser::getUsername, query.getUsername())
+                .orderByDesc(SysUser::getCreateTime);
+        return sysUserService.page(page, queryWrapper);
     }
 }
